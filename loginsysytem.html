@@ -1,0 +1,261 @@
+<!DOCTYPE html><!DOCTYPE html>
+<head>
+    <title>Login System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .form-group small {
+            color: #555;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .form-actions {
+            text-align: center;
+        }
+
+        .form-actions button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-actions button:hover {
+            background-color: #0056b3;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .links a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 5px;
+            transition: color 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Password Strength Feedback */
+        .password-feedback {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .password-feedback.red {
+            color: red;
+        }
+
+        .password-feedback.yellow {
+            color: yellow;
+        }
+
+        .password-feedback.green {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="login-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-actions">
+                <button type="button" onclick="loginUser()">Login</button>
+            </div>
+            <div class="links">
+                <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+                <a href="#" onclick="showRegister()">Register</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="container hidden" id="register-container">
+        <h2>Create an Account</h2>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="reg-email">Email</label>
+                <input type="email" id="reg-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-password">Password</label>
+                <input type="password" id="reg-password" placeholder="Enter your password" required oninput="checkPasswordStrength()">
+                <div id="password-strength" class="password-feedback"></div>
+            </div>
+            <div class="form-actions">
+                <button type="button" onclick="registerUser()">Register</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container hidden" id="forgot-password-container">
+        <h2>Forgot Password</h2>
+        <form id="forgot-password-form">
+            <div class="form-group">
+                <label for="forgot-email">Email</label>
+                <input type="email" id="forgot-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" placeholder="Enter your new password" required>
+            </div>
+            <div class="form-actions">
+                <button type="button" onclick="updatePassword()">Update Password</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function showRegister() {
+            document.getElementById('login-container').classList.add('hidden');
+            document.getElementById('register-container').classList.remove('hidden');
+        }
+
+        function showForgotPassword() {
+            document.getElementById('login-container').classList.add('hidden');
+            document.getElementById('forgot-password-container').classList.remove('hidden');
+        }
+
+        function loginUser() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            if (localStorage.getItem(email) === password) {
+                alert('Login successful! Redirecting...');
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Invalid email or password. Please try again.');
+            }
+        }
+
+        function registerUser() {
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+
+            if (email && password) {
+                localStorage.setItem(email, password);
+                alert('Registration successful! Please login to your account.');
+                document.getElementById('register-container').classList.add('hidden');
+                document.getElementById('login-container').classList.remove('hidden');
+            } else {
+                alert('Please make sure to fill in all fields.');
+            }
+        }
+
+        function updatePassword() {
+            const email = document.getElementById('forgot-email').value;
+            const newPassword = document.getElementById('new-password').value;
+
+            if (email && newPassword) {
+                localStorage.setItem(email, newPassword);
+                alert('Password updated successfully! You can now login with your new password.');
+                document.getElementById('forgot-password-container').classList.add('hidden');
+                document.getElementById('login-container').classList.remove('hidden');
+            } else {
+                alert('Please make sure to fill in all fields.');
+            }
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('reg-password').value;
+            const feedback = document.getElementById('password-strength');
+
+            if (password.length < 6) {
+                feedback.textContent = 'Password is too short. Use at least 6 characters.';
+                feedback.className = 'password-feedback red';
+            } else if (password.length < 8 && /[A-Za-z]/.test(password) && /\d/.test(password) && /[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                feedback.textContent = 'Good password. Consider adding more characters.';
+                feedback.className = 'password-feedback yellow';
+            } else if (password.length >= 9 && /[A-Za-z]/.test(password) && /\d/.test(password) && /[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                feedback.textContent = 'Very good password! Your password is strong.';
+                feedback.className = 'password-feedback green';
+            }
+        }
+    </script>
+</body>
+</html>
