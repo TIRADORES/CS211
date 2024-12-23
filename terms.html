@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        /* General page styling */
+        body {
+            background-image: url('BUILDING.gif');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Center content vertically */
+        .content {
+            margin: auto;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        h1 i {
+            font-style: italic;
+            color: #ff8400;
+        }
+
+        /* Table and link styling */
+        table {
+            margin-top: 20px;
+        }
+
+        a {
+            color: #ff8400;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer styling */
+        .footer {
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            bottom: 0;
+        }
+
+        .footer p {
+            margin: 5px;
+            font-size: 0.9em;
+        }
+
+        .footer a img {
+            width: 20px;
+            margin: 0 10px;
+            vertical-align: left;
+        }
+
+        .footer a:hover img {
+            filter: brightness(1.5);
+        }
+
+        /* Modal overlay styling */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            color: black;
+            font-size: 1em;
+            overflow-y: auto;
+            max-height: 80%;
+        }
+
+        /* Close button styling */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Accept button styling */
+        .accept-btn {
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            background-color: black;
+            color: #ff8400;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .accept-btn:hover {
+            background-color: #333;
+        }
+
+        /* Styling for Terms and Privacy links */
+        .terms-privacy-links {
+            margin-top: 10px;
+        }
+
+        .terms-privacy-links a {
+            color: #ff8400;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .terms-privacy-links a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>We Don't Just,<br>
+            <i>Build,</i><br>
+        </h1>
+
+        <table>
+            <tr>
+                <td>
+                    <a href="mainpage.html"><u><b>We Deliver.</b></u></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <div class="terms-privacy-links">
+            <a href="#" id="termsLink">Terms</a> |
+            <a href="#" id="privacyLink">Privacy</a>
+        </div>
+        <p>&copy; 2024 RBS. All rights reserved.</p>
+        <p>
+            <a href="https://facebook.com/hatdog"><img src="fb.png" alt="Facebook"></a>
+            <a href="https://instagram.com/sirkenneththebest"><img src="ig.jpg" alt="Instagram"></a>
+            <a href="https://twitter.com/sirkennethgoat"><img src="twitter.png" alt="Twitter"></a>
+            <a href="mailto:sirkenneththebest"><img src="gmail.png" alt="Gmail"></a>
+        </p>
+    </div>
+
+    <!-- Modal for Terms and Conditions -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeTerms">&times;</span>
+            <h2>Terms & Conditions</h2>
+            <p>Welcome to our website. By accessing and using this website, you accept and agree to be bound by the terms and conditions of this agreement.</p>
+            <ol>
+                <li><strong>Use of the Website:</strong> You agree to use the website only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the website.</li>
+                <li><strong>Intellectual Property:</strong> The content on this website, including but not limited to text, images, and logos, is owned by us and protected by copyright and trademark laws.</li>
+                <li><strong>Limitation of Liability:</strong> We shall not be liable for any damages that result from the use of, or the inability to use, the materials on this site, even if we have been advised of the possibility of such damages.</li>
+                <li><strong>Changes to Terms & Conditions:</strong> We reserve the right to make changes to these terms and conditions at any time. Your continued use of the website will signify your acceptance of any adjustment to these terms.</li>
+            </ol>
+            <p>If you have any questions about our Terms & Conditions, please <a href="mailto:sirkenneththebest">contact us</a>.</p>
+            <button class="accept-btn" id="acceptTerms">Accept</button>
+        </div>
+    </div>
+
+    <!-- Modal for Privacy Policy -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closePrivacy">&times;</span>
+            <h2>Privacy Policy</h2>
+            <p>Your privacy is important to us. Please read our Privacy Policy for information on how we collect, use, and protect your personal data.</p>
+            <ul>
+                <li><strong>Information Collection:</strong> We collect information from you when you visit our site or fill out a form.</li>
+                <li><strong>Use of Information:</strong> The information we collect is used to personalize your experience and improve our website.</li>
+                <li><strong>Data Protection:</strong> We implement a variety of security measures to maintain the safety of your personal information.</li>
+                <li><strong>Cookies:</strong> We use cookies to enhance user experience. You can control cookie settings through your browser.</li>
+            </ul>
+            <p>If you have any questions about our Privacy Policy, please <a href="mailto:sirkenneththebest">contact us</a>.</p>
+            <button class="accept-btn" id="acceptPrivacy">Accept</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal elements
+        var termsModal = document.getElementById('termsModal');
+        var privacyModal = document.getElementById('privacyModal');
+
+        // Get the links that open the modals
+        var termsLink = document.getElementById('termsLink');
+        var privacyLink = document.getElementById('privacyLink');
+
+        // Get the close buttons
+        var closeTerms = document.getElementById('closeTerms');
+        var closePrivacy = document.getElementById('closePrivacy');
+
+        // Get the accept buttons
+        var acceptTerms = document.getElementById('acceptTerms');
+        var acceptPrivacy = document.getElementById('acceptPrivacy');
+
+        // When the user clicks on the Terms link, open the Terms modal
+        termsLink.onclick = function() {
+            termsModal.style.display = "block";
+        }
+
+        // When the user clicks on the Privacy link, open the Privacy modal
+        privacyLink.onclick = function() {
+            privacyModal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        closeTerms.onclick = function() {
+            termsModal.style.display = "none";
+        }
+
+        closePrivacy.onclick = function() {
+            privacyModal.style.display = "none";
+        }
+
+        // When the user clicks on the Accept button, close the modal
+        acceptTerms.onclick = function() {
+            termsModal.style.display = "none";
+        }
+
+        acceptPrivacy.onclick = function() {
+            privacyModal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == termsModal) {
+                termsModal.style.display = "none";
+            }
+            if (event.target == privacyModal) {
+                privacyModal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
